@@ -1,24 +1,32 @@
+"""
+This file contains the code for the classifier.
+"""
+
+import numpy as np
+from PIL import Image
 from taipy.gui import Gui
 from tensorflow.keras import models
-from PIL import Image
-import numpy as np
 
 class_names = {
-    0: 'airplane',
-    1: 'automobile',
-    2: 'bird',
-    3: 'cat',
-    4: 'deer',
-    5: 'dog',
-    6: 'frog',
-    7: 'horse',
-    8: 'ship',
-    9: 'truck',
+    0: "airplane",
+    1: "automobile",
+    2: "bird",
+    3: "cat",
+    4: "deer",
+    5: "dog",
+    6: "frog",
+    7: "horse",
+    8: "ship",
+    9: "truck",
 }
 
 model = models.load_model("baseline_mariya.keras")
 
+
 def predict_image(model, path_to_img):
+    """
+    Predict the image class using the model.
+    """
     img = Image.open(path_to_img)
     img = img.convert("RGB")
     img = img.resize((32, 32))
@@ -28,9 +36,10 @@ def predict_image(model, path_to_img):
 
     top_prob = probs.max()
     top_pred = class_names[np.argmax(probs)]
-    
+
     return top_prob, top_pred
-    
+
+
 content = ""
 img_path = "placeholder_image.png"
 prob = 0
@@ -51,17 +60,17 @@ select an image from your file system
 >
 """
 
+
 def on_change(state, var_name, var_val):
+    """
+    On change function for the GUI.
+    """
     if var_name == "content":
         top_prob, top_pred = predict_image(model, var_val)
         state.prob = round(top_prob * 100)
         state.pred = "this is a " + top_pred
         state.img_path = var_val
-    #print(var_name, var_val)
-
-
-
-
+    # print(var_name, var_val)
 
 
 app = Gui(page=index)
