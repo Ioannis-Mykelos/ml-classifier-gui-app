@@ -5,13 +5,9 @@ Simple machine learning image classifier GUI app.
 
 In this repository you will find how to create a beautiful GUI application that can classify images of animals and vehicles!
 
-<img src="https://github.com/MariyaSha/ml_gui_app/assets/32107652/4925650b-9ee5-4b55-ab7c-415b772762c1" width=600px>
-
 ## Finished Project
 
 Includes the complete application, along with 2 jupyter notebooks with plenty of information to help you customize your own image classifying neural networks.
-<br>
-The complete app is also live and running on Taipy's cloud: https://classifier.taipy.cloud/
 
 ## Requirements
 1. Clone this repository on your local system, and navigate to project folder:
@@ -27,7 +23,7 @@ cd ml-classifier-gui-app
 2. Create a virtual environment with `uv` and install dependencies (uv + WSL example):
 ```
 uv init
-uv add pre-commit fastapi requests jinja2 python-multipart uvicorn
+uv add pre-commit keras matplotlib numpy pandas pillow pre-commit tensorflow jupyter ipykernel
 uv lock
 uv sync
 ```
@@ -35,6 +31,14 @@ uv sync
 3. Activate your `.venv` environment (created by `uv sync`):
 - Windows use `.venv\Scripts\activate`
 - Linux `source .venv/bin/activate`
+
+4. Create a juputer kernel from your new virtual environment (under `Jupyter kernel`)
+```
+# Create the kernel
+python -m ipykernel install --user --name=ml-classifier-gui-app --display-name "Python (ml-classifier-gui-app) env"
+```
+
+or you can use the kernel that was already created under the name `.venv` (under `Python environments`).
 
 
 ## Screenshot
