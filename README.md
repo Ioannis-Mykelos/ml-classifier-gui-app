@@ -22,7 +22,7 @@ cd ml-classifier-gui-app
 
 2. Create a virtual environment with `uv` and install dependencies (uv + WSL example):
 ```
-uv init
+uv venv
 uv add pre-commit keras matplotlib numpy pandas pillow pre-commit tensorflow jupyter ipykernel
 uv lock
 uv sync

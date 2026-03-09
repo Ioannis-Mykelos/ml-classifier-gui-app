@@ -7,6 +7,9 @@ from PIL import Image
 from taipy.gui import Gui
 from tensorflow.keras import models
 
+# import keras
+# from keras import models
+
 class_names = {
     0: "airplane",
     1: "automobile",
@@ -20,7 +23,7 @@ class_names = {
     9: "truck",
 }
 
-model = models.load_model("baseline_mariya.keras")
+model = models.load_model("../model/baseline_mariya.keras")
 
 
 def predict_image(model, path_to_img):
