@@ -10,7 +10,7 @@ from tensorflow.keras import models
 
 # Get absolute path to project root
 project_root = Path(__file__).resolve().parent.parent.parent
-model_path = project_root / "src" / "model" / "baseline_one.h5"
+model_path = project_root / "src" / "model" / "baseline_one.keras"
 print("-----------------")
 
 print(f"Project root: {project_root}")
