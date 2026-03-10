@@ -2,9 +2,9 @@
 
 from taipy import Gui
 
-img_path = "finishedProject/images/app_images/placeholder_image.png"
-logo_path = "finishedProject/images/app_images/logo.png"
-content = ""
+IMAGE_PATH = "finishedProject/images/app_images/placeholder_image.png"
+LOGO_PATH = "finishedProject/images/app_images/logo.png"
+CONTENT = ""
 
 
 # The callback function
@@ -12,23 +12,30 @@ content = ""
 # var_name: the name of the variable that was changed
 # var_value: the new value of that variable
 def on_change(state, var_name, var_value):
+    """
+    On change function for the GUI.
+    Args:
+        state: The state of the app.
+        var_name: The name of the variable that was changed.
+        var_value: The new value of that variable.
+    """
     if var_name == "content":
         # Update the image path displayed on the screen
-        state.img_path = var_value
+        state.IMAGE_PATH = var_value
 
 
-index = """
+INDEX_PAGE = """
 <|text-center|
-<|{logo_path}|image|width=25vw|>
+<|{LOGO_PATH}|image|width=25vw|>
 
 #### Select your image from your file system
-<|{content}|file_selector|extensions=.png,.jpg|>
+<|{CONTENT}|file_selector|extensions=.png,.jpg|>
 
-<|{img_path}|image|width=25vw|>
+<|{IMAGE_PATH}|image|width=25vw|>
 |>
 """
 
-app = Gui(page=index)
+app = Gui(page=INDEX_PAGE)
 
 if __name__ == "__main__":
     app.run(use_reloader=True, port=5000)
