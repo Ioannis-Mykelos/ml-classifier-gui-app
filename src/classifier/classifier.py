@@ -1,5 +1,6 @@
 """ This file contains the code for the classifier GUI app."""
 
+from pathlib import Path
 from typing import Any
 
 from help_functions import my_model, predict_image
@@ -37,9 +38,11 @@ from taipy.gui import Gui
 #     return top_prob, top_pred
 
 
+# Get absolute path to project root
+project_root = Path(__file__).resolve().parent.parent.parent
+IMAGE_PATH = project_root / "src" / "images" / "app_images" / "placeholder_image.png"
+IMAGE_LOGO = project_root / "src" / "images" / "app_images" / "logo.png"
 CONTENT = ""
-IMAGE_PATH = "../images/app_images/placeholder_image.png"
-IMAGE_LOGO = "../images/app_images/logo.png"
 prob = 0
 pred = ""
 
@@ -55,7 +58,7 @@ select an image from your file system
 <|{IMAGE_PATH}|image|>
 
 <|{prob}|indicator|value={prob}|min=0|max=100|width=25vw|>
->
+|>
 """
 
 
