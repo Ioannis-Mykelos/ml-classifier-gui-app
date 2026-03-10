@@ -53,7 +53,6 @@ python src/classifier/classifier.py
 ## Play with your web app
 
 You can find your GUI application in `http://127.0.0.1:5000/`.
-
-## Extend your Deep Learning model, by training it in a bigger sample, with more images, or try other image classification uses. It is up to you.
+Extend your Deep Learning model, by training it in a bigger sample, with more images, or try other image classification uses. It is up to you.
 
 
