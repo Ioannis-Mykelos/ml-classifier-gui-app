@@ -3,59 +3,32 @@
 from pathlib import Path
 from typing import Any
 
-from help_functions import my_model, predict_image
+from help_functions import load_model, predict_image  # my_model,
 from taipy.gui import Gui
-
-# from classes import class_names
-# from tensorflow.keras import models
-# from PIL import Image
-# import numpy as np
-
-# model = models.load_model("../model/baseline_one.keras")
-
-# def predict_image(model, path_to_img):
-#     """
-#     Predict the image class using the given trained model and a file path to an image.
-
-#     Args:
-#         model: The trained Keras model used for prediction.
-#         path_to_img: String path to the input image file.
-
-#     Returns:
-#         top_prob (float): The probability of the most likely class (between 0 and 1).
-#         top_pred (str): The name of the predicted class.
-#     """
-#     img = Image.open(path_to_img)
-#     img = img.convert("RGB")
-#     img = img.resize((32, 32))
-#     data = np.asarray(img)
-#     data = data / 255
-#     probs = model.predict(np.array([data])[:1])
-
-#     top_prob = probs.max()
-#     top_pred = class_names[np.argmax(probs)]
-
-#     return top_prob, top_pred
-
 
 # Get absolute path to project root
 project_root = Path(__file__).resolve().parent.parent.parent
-IMAGE_PATH = project_root / "src" / "images" / "app_images" / "placeholder_image.png"
-IMAGE_LOGO = project_root / "src" / "images" / "app_images" / "logo.png"
-CONTENT = ""
+model_path = project_root / "src" / "model" / "baseline.keras"
+image_path = project_root / "src" / "images" / "app_images" / "placeholder_image.png"
+logo_path = project_root / "src" / "images" / "app_images" / "logo.png"
+content = ""
 prob = 0
 pred = ""
 
+# my_model = models.load_model(model_path)
+my_model = load_model(the_model_path=model_path)
+
+
 index = """
 <|text-center|
-<|{IMAGE_LOGO}|image|width=25vw|>
+<|{logo_path}|image|width=25vw|>
 
-<|{CONTENT}|file_selector|extensions=.png|>
+<|{content}|file_selector|extensions=.png,.jpg|>
 select an image from your file system
 
 <|{pred}|>
 
-<|{IMAGE_PATH}|image|>
+<|{image_path}|image|>
 
 <|{prob}|indicator|value={prob}|min=0|max=100|width=25vw|>
 |>
@@ -76,12 +49,14 @@ def on_change(state: Any, var_name: str, var_val: Any) -> None:
     the selected image using the pre-trained model, updates the prediction and probability displays,
     and refreshes the image shown in the GUI.
     """
+    print("---------------------------------------------")
     if var_name == "content":
-        top_prob, top_pred = predict_image(my_model, var_val)
+        top_prob, top_pred = predict_image(model=my_model, path_to_img=var_val)
         state.prob = round(top_prob * 100)
         state.pred = "this is a " + top_pred
-        state.img_path = var_val
-    # print(var_name, var_val)
+        state.image_path = var_val
+    print(f" - The Var name = {var_name}")
+    print(f" - The Var value = {var_val}")
 
 
 app = Gui(page=index)

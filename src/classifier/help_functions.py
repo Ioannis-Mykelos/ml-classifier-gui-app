@@ -8,23 +8,47 @@ from classes import class_names
 from PIL import Image
 from tensorflow.keras import models
 
-# Get absolute path to project root
-project_root = Path(__file__).resolve().parent.parent.parent
-model_path = project_root / "src" / "model" / "baseline_one.keras"
-print("-----------------")
+# # Get absolute path to project root
+# project_root = Path(__file__).resolve().parent.parent.parent
+# model_path = project_root / "src" / "model" / "baseline.keras"
+# print("-----------------")
+# print(f"Project root: {project_root}")
+# print(f"Model path: {model_path}")
+# print(f"Model exists: {model_path.exists()}")
+# print("-----------------")
 
-print(f"Project root: {project_root}")
-print(f"Model path: {model_path}")
-print(f"Model exists: {model_path.exists()}")
-print("-----------------")
+# if not model_path.exists():
+#     raise FileNotFoundError(f"Model not found at {model_path}")
 
-if not model_path.exists():
-    raise FileNotFoundError(f"Model not found at {model_path}")
-
-my_model = models.load_model(str(model_path))
+# my_model = models.load_model(model_path)
 
 
-def predict_image(model: Any = my_model, path_to_img: str = "") -> Tuple[float, str]:
+def load_model(the_model_path: str):
+    """
+    Loads a trained Keras model from the specified file path.
+
+    Args:
+        the_model_path (str): The file path to the trained Keras model.
+
+    Returns:
+        model: The loaded Keras model instance if successful, otherwise None.
+
+    Raises:
+        FileNotFoundError: If the model file does not exist at the given path.
+        Exception: For any other issues encountered during model loading.
+    """
+    try:
+        model_path = Path(the_model_path)
+        if not model_path.exists():
+            raise FileNotFoundError(f"Model not found at {model_path}")
+        model = models.load_model(model_path)
+        return model
+    except Exception as e:
+        print(f"Error loading model: {e}")
+        return None
+
+
+def predict_image(model: Any, path_to_img: str) -> Tuple[float, str]:
     """
     Predict the image class using the given trained model and a file path to an image.
 
