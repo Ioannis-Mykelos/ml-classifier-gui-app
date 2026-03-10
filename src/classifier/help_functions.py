@@ -8,20 +8,6 @@ from classes import class_names
 from PIL import Image
 from tensorflow.keras import models
 
-# # Get absolute path to project root
-# project_root = Path(__file__).resolve().parent.parent.parent
-# model_path = project_root / "src" / "model" / "baseline.keras"
-# print("-----------------")
-# print(f"Project root: {project_root}")
-# print(f"Model path: {model_path}")
-# print(f"Model exists: {model_path.exists()}")
-# print("-----------------")
-
-# if not model_path.exists():
-#     raise FileNotFoundError(f"Model not found at {model_path}")
-
-# my_model = models.load_model(model_path)
-
 
 def load_model(the_model_path: str):
     """

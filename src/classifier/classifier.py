@@ -3,7 +3,7 @@
 from pathlib import Path
 from typing import Any
 
-from help_functions import load_model, predict_image  # my_model,
+from help_functions import load_model, predict_image
 from taipy.gui import Gui
 
 # Get absolute path to project root
@@ -15,9 +15,7 @@ content = ""
 prob = 0
 pred = ""
 
-# my_model = models.load_model(model_path)
 my_model = load_model(the_model_path=model_path)
-
 
 index = """
 <|text-center|
