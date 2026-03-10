@@ -48,10 +48,6 @@ python -m ipykernel install --user --name=ml-classifier-gui-app --display-name "
 5. Run the App
 ```
 python src/classifier/classifier.py
-
-# or
-
-uv python run src/classifier/classifier.py
 ```
 
 ## Play with your web app
